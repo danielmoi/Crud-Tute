@@ -13,3 +13,6 @@ app.get('/', (req, res) => {
   
 });
 
+app.post('/quotes', (req, res) => {
+  console.log('got the POST request to /quotes!');
+});
