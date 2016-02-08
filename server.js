@@ -59,3 +59,9 @@ app.post('/quotes', (req, res) => {
     res.redirect('/');
   });
 });
+
+app.put('/quotes', (req, res) => {
+  // Handle put request
+  
+  
+});
