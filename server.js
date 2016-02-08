@@ -9,7 +9,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 var db;
 
-MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds059165.mongolab.com:59165/starwars-quotes', (err, database) => {
+MongoClient.connect('mongodb://dm1:MLdm1@ds059165.mongolab.com:59165/starwars-quotes', (err, database) => {
   // ... start the server
   if (err) {
     return console.log(err);
