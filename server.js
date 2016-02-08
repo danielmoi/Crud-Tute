@@ -30,16 +30,18 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-//  res.sendFile(__dirname + '/index.html');
+  //  res.sendFile(__dirname + '/index.html');
 
   // this loads upon page load (which is done by app.post)
   db.collection('quotes').find().toArray((err, result) => {
     if (err) {
       return console.log(err);
     }
-    res.render('index.ejs', {quotes: result});
+    res.render('index.ejs', {
+      quotes: result
+    });
   });
-  
+
 });
 
 app.post('/quotes', (req, res) => {
@@ -61,7 +63,24 @@ app.post('/quotes', (req, res) => {
 });
 
 app.put('/quotes', (req, res) => {
-  // Handle put request
-  
-  
+// Handle put request
+db.collection('quotes')
+  .findOneAndUpdate({
+    name: 'Yoda'
+  }, {
+    $set: {
+      name: req.body.name,
+      quote: req.body.quote
+    }
+  }, {
+    sort: {
+      _id: -1
+    },
+    upsert: true
+  }, (err, result) => {
+    if (err) {
+      return res.send(err);
+    }
+  res.send(result);
+  });
 });
