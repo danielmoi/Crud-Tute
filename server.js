@@ -20,6 +20,7 @@ MongoClient.connect('mongodb://dm1:MLdm1@ds059165.mongolab.com:59165/starwars-qu
   });
 });
 
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
   extended: true
