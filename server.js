@@ -5,9 +5,10 @@ const app = express();
 
 app.listen(3000, function() {
   console.log('listening on 3000');
+  console.log(__dirname);
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send(__dirname + '/index.html');
 });
 
