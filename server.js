@@ -84,3 +84,21 @@ db.collection('quotes')
   res.send(result);
   });
 });
+
+app.delete('/quotes', (req, res) => {
+  // Handle delete event here
+  db.collection('quotes')
+    .findOneAndDelete({
+    name: req.body.name
+  }, function (err, result) {
+    if (err) {
+      return res.send(500, err);
+    }
+    res.send(result); // not in repo (was a string)
+  });
+  
+  
+  
+  
+  
+});
