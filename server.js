@@ -18,18 +18,13 @@ MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds059165.mongolab.com:59165
   app.listen(3000, () => {
     console.log('listening on 3000');
   });
-})
+});
 
 
 app.use(bodyParser.urlencoded({
   extended: true
-}
-));
+}));
 
-app.listen(3000, function () {
-  console.log('listening on 30000');
-  console.log(__dirname);
-});
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -40,5 +35,16 @@ app.post('/quotes', (req, res) => {
   console.log('got the POST request to /quotes!');
   console.log(req.body);
   // { name: 'NODEMAN', quote: 'hello...' }
-});
 
+  // create 'quotes' collection; 'collection' method
+  // save first entry into DB; 'save' method
+  db.collection('quotes').save(req.body, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('saved to database!');
+
+    // redirect user back to /, which causes browser to reload
+    res.redirect('/');
+  });
+});
