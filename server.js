@@ -4,9 +4,20 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
+
+
+var db;
+
 MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds059165.mongolab.com:59165/starwars-quotes', (err, database) => {
   // ... start the server
+  if (err) {
+    return console.log(err);
+  }
+  db = database;
+  app.listen(3000, () => {
+    console.log('listening on 3000');
+  });
 })
 
 
@@ -30,3 +41,4 @@ app.post('/quotes', (req, res) => {
   console.log(req.body);
   // { name: 'NODEMAN', quote: 'hello...' }
 });
+
