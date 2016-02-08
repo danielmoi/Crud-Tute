@@ -28,14 +28,16 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+//  res.sendFile(__dirname + '/index.html');
 
-  var useless = db.collection('quotes').find();
-  console.log(useless);
-
-  var cursor = db.collection('quotes').find().toArray(function (err, results) {
-    console.log(results);
+  // this loads upon page load (which is done by app.post)
+  db.collection('quotes').find().toArray((err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render('index.ejs', {quotes: result});
   });
+  
 });
 
 app.post('/quotes', (req, res) => {
