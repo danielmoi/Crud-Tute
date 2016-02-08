@@ -4,6 +4,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+const MongoClient = require('mongodb').MongoClient
+MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds059165.mongolab.com:59165/starwars-quotes', (err, database) => {
+  // ... start the server
+})
+
+
 app.use(bodyParser.urlencoded({
   extended: true
 }
